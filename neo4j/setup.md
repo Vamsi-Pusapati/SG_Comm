@@ -18,8 +18,8 @@ Install the neosemantics and APOC plugins.
 APOC is builtin, neosemantics may be available in the graph apps sidebar tab, but can otherwise be installed by adding the jar file into the plugins directory. 
 To access the plugins directory click on the three dots on the dbms, folder, plugins, and add the file.
 
-<img src="graphApps.png" height="400">
-<img src="dbmsAndPluginSetup.png" height="400">
+<img src="images/graphApps.png" height="400">
+<img src="images/dbmsAndPluginSetup.png" height="400">
 
 (You will not have the install option for neosemantics yet. Follow instructions below to install neosemantics plugin)
 
@@ -43,7 +43,7 @@ For server installation use a terminal and vim.
 
 4. You should have a something like this now.
    
-<img src="finalProjectSetup.png" height="400">
+<img src="images/finalProjectSetup.png" height="400">
 
 ### Verifying the installation
 
@@ -62,8 +62,8 @@ on the neo4j browser. This should return the following message
 {"ping":"here!"}
 ```
 
-<img src="showProcedures.png" height="400">
-<img src="ping.png" height="400">
+<img src="images/showProcedures.png" height="400">
+<img src="images/ping.png" height="400">
 
 
 ## RDF / OWL import setup
@@ -101,9 +101,9 @@ call n10s.graphconfig.init( { handleMultival: "ARRAY",
                               keepLangTag: true })
 ```
 
-<img src="constraint.png" height="400">
-<img src="init.png" height="400">
-<img src="init2.png" height="400">
+<img src="images/constraint.png" height="400">
+<img src="images/init.png" height="400">
+<img src="images/init2.png" height="400">
 
 #### 2.  Importing RDF data
 
@@ -118,7 +118,7 @@ Or to use a local file:
 CALL n10s.rdf.import.fetch("file:///Users/claytonjones/Documents/cyber-defense-7550/project/OntoPowSys.rdf","RDF/XML");
 ```
 
-<img src="fetch.png" height="400">
+<img src="images/fetch.png" height="400">
 
 It is possible to pass some request specific parameters like headerParams, commitSize, languageFilter...
 (also found [the reference](https://neo4j.com/labs/neosemantics/4.0/reference/))

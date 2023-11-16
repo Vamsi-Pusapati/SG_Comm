@@ -11,24 +11,16 @@
 	https://neo4j.com/download/?utm_source=google&utm_medium=PaidSearch&utm_campaign=GDB&utm_content=AMS-X-Conversion-GDB-Text&utm_term=download%20neo4j&gad_source=1&gclid=EAIaIQobChMI6duVsoLJggMVzvbICh0E4Q8AEAAYASAAEgIO1PD_BwE
 
 
-### On Neo4j Desktop
+### On Neo4j
 
 Select your database, USE VERSION 5.11 for both dbms and neosemantics plugin
+Install the neosemantics and APOC plugins. APOC is builtin, neosemsntics may be available in the graph apps sidebar tab, but can otherwise be installed by adding the jar file into the plugins directory. To access plugins directory click on the three dots on the dbms, folder, plugins, and add the file.
 
-<img src="graphApps.png">
+<img src="graphApps.png" height="400">
 <img src="dbmsAndPluginSetup.png" height="400">
 
-If you want have the http endpoint mounted on your DB server, you'll need to 
+You want to have the http endpoint mounted on your DB server, so you'll need to 
 add the following line to your config. 
-
-  ```
-  dbms.unmanaged_extension_classes=n10s.endpoint=/rdf
-  ```
-In the desktop you'll be able to do this by clicking on the 
-three dots to the right hand side of your database and then select settings. 
-You can add the fragment at the end of the file. 
-
-### On a Neo4j Server 
 
 1. Download the jar file from the [releases area](https://github.com/neo4j-labs/neosemantics/releases) and copy 
 it in the <NEO_HOME>/plugins directory of your Neo4j instance. 
@@ -38,18 +30,20 @@ it in the <NEO_HOME>/plugins directory of your Neo4j instance.
       ``` 
 3. Restart the server. 
 
+In the desktop you'll be able to do this by clicking on the 
+three dots to the right hand side of your database and then select settings. 
+You can add the fragment at the end of the file. 
 
 ### Verifying the installation
 
 You can check that the installation went well by:
-Running `SHOW PROCEDURES yield name, description, signature`. The list of procedures should include a number of them prefixed by **n10s**.
+Running the cypher `SHOW PROCEDURES yield name, description, signature`. The list of procedures should include a number of them prefixed by **n10s**.
 
 For testing the extension is mounted run `:GET http://localhost:7474/rdf/ping` on 
 the neo4j browser. This should return the following message
 ```
 {"ping":"here!"}
 ```
-
 
 ## Basic flow
 

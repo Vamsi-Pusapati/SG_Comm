@@ -133,3 +133,5 @@ call n10s.onto.import.fetch(...)
 ```
 
 Use autocompletion to discover the different procedures.
+
+<img src="images/finalGraph.png" height="400">

@@ -1,9 +1,4 @@
 # Neo4j setup instructions for use with neosemantics (n10s), Ontologies, and Knowledge Graphs
-![n10s Logo](https://guides.neo4j.com/rdf/n10s.png) neosemantics is a plugin that enables the **use of RDF in Neo4j**. [RDF is a W3C standard model](https://www.w3.org/RDF/) for data interchange. Some key features of n10s are:
-
-
-
-
 
 ## Installation
 

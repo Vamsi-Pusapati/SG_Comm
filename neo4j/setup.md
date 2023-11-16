@@ -1,27 +1,24 @@
-# neosemantics (n10s)
+# Neo4j setup instructions for use with neosemantics (n10s), Ontologies, and Knowledge Graphs
 ![n10s Logo](https://guides.neo4j.com/rdf/n10s.png) neosemantics is a plugin that enables the **use of RDF in Neo4j**. [RDF is a W3C standard model](https://www.w3.org/RDF/) for data interchange. Some key features of n10s are:
 
 
-* **Store RDF data in Neo4j** in a
-lossless manner (imported RDF can subsequently be exported without losing a single triple in the process).
-* On-demand **export property graph data** from Neo4j *as RDF*.
-* Model **validation** based on the **W3C SHACL language**
-* Import of **Ontologies and Taxonomies** in **OWL/RDFS/SKOS/...**
-
-Other features in NSMNTX include *model mapping* and *inferencing* on Neo4j graphs.
 
 
-## ⇨ User Manual and Blog ⇦ 
-
-⇨ Check out the complete **[user manual](https://neo4j.com/labs/neosemantics/4.0)** with examples of use. ⇦
-
-⇨ [Blog on neosemantics](https://jbarrasa.com/category/graph-rdf/) (and more). ⇦
 
 ## Installation
 
+1. Install neo4j, create a project, and add a dbms to the project. See neo4j installation instructions below for help with this.
+
+	Desktop
+	https://neo4j.com/docs/desktop-manual/current/
+
+	Server
+	https://neo4j.com/download/?utm_source=google&utm_medium=PaidSearch&utm_campaign=GDB&utm_content=AMS-X-Conversion-GDB-Text&utm_term=download%20neo4j&gad_source=1&gclid=EAIaIQobChMI6duVsoLJggMVzvbICh0E4Q8AEAAYASAAEgIO1PD_BwE
+
+
 ### On Neo4j Desktop
 
-Select your database, and in the plugins section click on the install button (the most up-to-date compatible version will be shown). 
+Select your database, USE VERSION 5.11 for both dbms and neosemantics plugin 
 
 <img src="https://raw.githubusercontent.com/neo4j-labs/rdflib-neo4j/master/img/install-n10s.png" height="400">
 
@@ -50,15 +47,9 @@ it in the <NEO_HOME>/plugins directory of your Neo4j instance.
 ### Verifying the installation
 
 You can check that the installation went well by:
-Running `call dbms.procedures()`. The list of procedures should include a number of them prefixed by **n10s**.
+Running `SHOW PROCEDURES yield name, description, signature`. The list of procedures should include a number of them prefixed by **n10s**.
 
-If you installed the http endpoint, you can check it was correctly installed by looking in 
-the logs and making sure they show the following line on startup:
-```
-YYYY-MM-DD HH:MM:SS.000+0000 INFO  Mounted unmanaged extension [n10s.endpoint] at [/rdf]
-```
-
-An alternative way of testing the extension is mounted is by running `:GET /rdf/ping` on 
+For testing the extension is mounted run `:GET http://localhost:7474/rdf/ping` on 
 the neo4j browser. This should return the following message
 ```
 {"ping":"here!"}
@@ -70,7 +61,8 @@ the neo4j browser. This should return the following message
 ####  0. Pre-req: Constraint Creation
 
 ``` 
-CREATE CONSTRAINT n10s_unique_uri FOR (r:Resource) REQUIRE r.uri IS UNIQUE
+CREATE CONSTRAINT n10s_unique_uri FOR (r: Resource)
+REQUIRE r.uri IS
 ```
 
 #### 1.  Creating a Graph Configuration
@@ -107,7 +99,11 @@ Once the Graph config is created we can import data from a url using `fetch`:
 ``` 
 call n10s.rdf.import.fetch( "https://raw.githubusercontent.com/jbarrasa/neosemantics/3.5/docs/rdf/nsmntx.ttl",
                             "Turtle")
-``` 
+```
+Or to use a local file:
+```
+CALL n10s.rdf.import.fetch("file:///Users/claytonjones/Documents/cyber-defense-7550/project/OntoPowSys.rdf","RDF/XML");
+```
 
 Or pass it as a parameter using `inline`:
 
@@ -150,7 +146,3 @@ call n10s.onto.import.fetch(...)
 ```
 
 Use autocompletion to discover the different procedures.
-
-Full documentation will be available soon. In the meantime, please share your feedback in the [Neo4j community portal](https://community.neo4j.com/c/integrations/linked-data-rdf-ontology).
-
-Thanks! 

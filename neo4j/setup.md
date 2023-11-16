@@ -54,7 +54,9 @@ SHOW PROCEDURES yield name, description, signature
 The list of procedures should include a number of them prefixed by **n10s**.
 
 For testing the extension is mounted run:
-```:GET http://localhost:7474/rdf/ping```
+```
+:GET http://localhost:7474/rdf/ping
+```
 on the neo4j browser. This should return the following message
 ```
 {"ping":"here!"}
@@ -64,7 +66,7 @@ on the neo4j browser. This should return the following message
 <img src="ping.png" height="400">
 
 
-## Basic flow
+## RDF / OWL import setup
 
 ####  0. Pre-req: Constraint Creation
 

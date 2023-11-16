@@ -21,7 +21,7 @@ To access the plugins directory click on the three dots on the dbms, folder, plu
 <img src="graphApps.png" height="400">
 <img src="dbmsAndPluginSetup.png" height="400">
 
-(You will not have the install option for neosemantics yet. follow instructions below to install neosemantics plugin)
+(You will not have the install option for neosemantics yet. Follow instructions below to install neosemantics plugin)
 
 You want to have the http endpoint mounted on your DB server, so you'll need to 
 add the following line to your config. 
@@ -47,11 +47,15 @@ For server installation use a terminal and vim.
 
 ### Verifying the installation
 
-You can check that the installation went well by:
-Running the cypher `SHOW PROCEDURES yield name, description, signature`. The list of procedures should include a number of them prefixed by **n10s**.
+You can check that the installation went well by running the cypher:
+```
+SHOW PROCEDURES yield name, description, signature
+```
+The list of procedures should include a number of them prefixed by **n10s**.
 
-For testing the extension is mounted run `:GET http://localhost:7474/rdf/ping` on 
-the neo4j browser. This should return the following message
+For testing the extension is mounted run:
+```:GET http://localhost:7474/rdf/ping```
+on the neo4j browser. This should return the following message
 ```
 {"ping":"here!"}
 ```

@@ -52,7 +52,8 @@ the neo4j browser. This should return the following message
 ```
 {"ping":"here!"}
 ```
-<img src="showprocedures.png" height="400">
+
+<img src="showProcedures.png" height="400">
 <img src="ping.png" height="400">
 
 
@@ -89,7 +90,9 @@ Or customize it by passing a map with your options:
 call n10s.graphconfig.init( { handleMultival: "ARRAY", 
                               multivalPropList: ["http://voc1.com#pred1", "http://voc1.com#pred2"],
                               keepLangTag: true })
-``` 
+```
+
+<img src="constraint.png" height="400">
 <img src="init.png" height="400">
 <img src="init2.png" height="400">
 

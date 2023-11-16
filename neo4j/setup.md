@@ -58,9 +58,7 @@ For testing the extension is mounted run:
 :GET http://localhost:7474/rdf/ping
 ```
 on the neo4j browser. This should return the following message
-```
-{"ping":"here!"}
-```
+```{"ping":"here!"}```
 
 <img src="images/showProcedures.png" height="400">
 <img src="images/ping.png" height="400">
@@ -72,7 +70,7 @@ on the neo4j browser. This should return the following message
 
 ``` 
 CREATE CONSTRAINT n10s_unique_uri FOR (r: Resource)
-REQUIRE r.uri IS
+REQUIRE r.uri IS UNIQUE
 ```
 
 #### 1.  Creating a Graph Configuration

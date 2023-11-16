@@ -11,28 +11,36 @@
 	https://neo4j.com/download/?utm_source=google&utm_medium=PaidSearch&utm_campaign=GDB&utm_content=AMS-X-Conversion-GDB-Text&utm_term=download%20neo4j&gad_source=1&gclid=EAIaIQobChMI6duVsoLJggMVzvbICh0E4Q8AEAAYASAAEgIO1PD_BwE
 
 
-### On Neo4j
+### Neosemantics and APOC plugin installation
 
-Select your database, USE VERSION 5.11 for both dbms and neosemantics plugin
-Install the neosemantics and APOC plugins. APOC is builtin, neosemsntics may be available in the graph apps sidebar tab, but can otherwise be installed by adding the jar file into the plugins directory. To access plugins directory click on the three dots on the dbms, folder, plugins, and add the file.
+Select your database, (USE VERSION 5.11 for compatibility with both dbms and neosemantics plugin)
+Install the neosemantics and APOC plugins. 
+APOC is builtin, neosemsntics may be available in the graph apps sidebar tab, but can otherwise be installed by adding the jar file into the plugins directory. 
+To access the plugins directory click on the three dots on the dbms, folder, plugins, and add the file.
 
 <img src="graphApps.png" height="400">
 <img src="dbmsAndPluginSetup.png" height="400">
 
+(You will not have the install option for neosemantics yet. follow instructions below to install neosemantics plugin)
+
 You want to have the http endpoint mounted on your DB server, so you'll need to 
 add the following line to your config. 
 
-1. Download the jar file from the [releases area](https://github.com/neo4j-labs/neosemantics/releases) and copy 
-it in the <NEO_HOME>/plugins directory of your Neo4j instance. 
+1. Download the neosemantics jar file from the
+   [releases area](https://github.com/neo4j-labs/neosemantics/releases)
+   and copy it in the <NEO_HOME>/plugins directory of your Neo4j instance. 
+
 2. Add the following line to your <NEO_HOME>/conf/neo4j.conf
       ```
       dbms.unmanaged_extension_classes=n10s.endpoint=/rdf
       ``` 
-3. Restart the server. 
-
+Add the fragment at the end of the file.
 In the desktop you'll be able to do this by clicking on the 
 three dots to the right hand side of your database and then select settings. 
-You can add the fragment at the end of the file. 
+For server installation use a terminal and vim.
+
+3. Restart the server. 
+
 
 ### Verifying the installation
 
@@ -44,6 +52,9 @@ the neo4j browser. This should return the following message
 ```
 {"ping":"here!"}
 ```
+<img src="showprocedures.png" height="400">
+<img src="ping.png" height="400">
+
 
 ## Basic flow
 
@@ -79,7 +90,8 @@ call n10s.graphconfig.init( { handleMultival: "ARRAY",
                               multivalPropList: ["http://voc1.com#pred1", "http://voc1.com#pred2"],
                               keepLangTag: true })
 ``` 
-
+<img src="init.png" height="400">
+<img src="init2.png" height="400">
 
 #### 2.  Importing RDF data
 
@@ -94,33 +106,7 @@ Or to use a local file:
 CALL n10s.rdf.import.fetch("file:///Users/claytonjones/Documents/cyber-defense-7550/project/OntoPowSys.rdf","RDF/XML");
 ```
 
-Or pass it as a parameter using `inline`:
-
-``` 
-with '
-@prefix neo4voc: <http://neo4j.org/vocab/sw#> .
-@prefix neo4ind: <http://neo4j.org/ind#> .
-
-neo4ind:nsmntx3502 neo4voc:name "NSMNTX" ;
-			   a neo4voc:Neo4jPlugin ;
-			   neo4voc:runsOn neo4ind:neo4j355 .
-
-neo4ind:apoc3502 neo4voc:name "APOC" ;
-			   a neo4voc:Neo4jPlugin ;		   
-			   neo4voc:runsOn neo4ind:neo4j355 .
-
-neo4ind:graphql3502 neo4voc:name "Neo4j-GraphQL" ;
-			   a neo4voc:Neo4jPlugin ;			   
-			   neo4voc:runsOn neo4ind:neo4j355 .			   			   
-
-neo4ind:neo4j355 neo4voc:name "neo4j" ;
-			   a neo4voc:GraphPlatform , neo4voc:AwesomePlatform .
-
-' as  payload
-
-call n10s.rdf.import.inline( payload, "Turtle") yield terminationStatus, triplesLoaded, triplesParsed, namespaces
-return terminationStatus, triplesLoaded, triplesParsed, namespaces
-``` 
+<img src="fetch.png" height="400">
 
 It is possible to pass some request specific parameters like headerParams, commitSize, languageFilter...
 (also found [the reference](https://neo4j.com/labs/neosemantics/4.0/reference/))

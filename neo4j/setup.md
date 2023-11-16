@@ -15,7 +15,7 @@
 
 Select your database, (USE VERSION 5.11 for compatibility with both dbms and neosemantics plugin)
 Install the neosemantics and APOC plugins. 
-APOC is builtin, neosemsntics may be available in the graph apps sidebar tab, but can otherwise be installed by adding the jar file into the plugins directory. 
+APOC is builtin, neosemantics may be available in the graph apps sidebar tab, but can otherwise be installed by adding the jar file into the plugins directory. 
 To access the plugins directory click on the three dots on the dbms, folder, plugins, and add the file.
 
 <img src="graphApps.png" height="400">
@@ -41,6 +41,9 @@ For server installation use a terminal and vim.
 
 3. Restart the server. 
 
+4. You should have a something like this now.
+   
+<img src="finalProjectSetup.png" height="400">
 
 ### Verifying the installation
 

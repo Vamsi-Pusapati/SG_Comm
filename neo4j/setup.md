@@ -13,10 +13,10 @@
 
 ### On Neo4j Desktop
 
-Select your database, USE VERSION 5.11 for both dbms and neosemantics plugin 
+Select your database, USE VERSION 5.11 for both dbms and neosemantics plugin
 
-#<img src="https://raw.githubusercontent.com/neo4j-labs/rdflib-neo4j/master/img/install-n10s.png" height="400">
-<img src="ping.png" height="400">
+<img src="graphApps.png">
+<img src="dbmsAndPluginSetup.png" height="400">
 
 If you want have the http endpoint mounted on your DB server, you'll need to 
 add the following line to your config. 

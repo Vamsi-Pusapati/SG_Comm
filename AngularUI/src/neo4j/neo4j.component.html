@@ -1,31 +1,32 @@
 <div class="container">
   <div id="viz-wrapper">
-    <div id="viz"></div>
-    <div id="loading" *ngIf="isLoading">
-        <mat-spinner diameter="50"></mat-spinner>
-    </div>
+    <svg id="viz" #graphContainer>
+    </svg>
+<!--    <div id="loading" *ngIf="isLoading">-->
+<!--        <mat-spinner diameter="50"></mat-spinner>-->
+<!--    </div>-->
   </div>
   <span class="cypher-form">
-    <mat-form-field id="cypher">
-      <mat-label>Cypher Query</mat-label>
-      <input matInput [(ngModel)]="cypherQuery" required [disabled]="isLoading">
-    </mat-form-field>
-    <button mat-raised-button color="accent" type="button" (click)="reload()">
-      <span class="fa-solid fa-play" aria-hidden="true"></span> Submit
-    </button>
-    <button mat-raised-button color="primary" type="button" (click)="reset()">
-      <span class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></span> Reset
-    </button>
-    <button mat-raised-button color="primary" type="button" (click)="stabilize()">
-      <span class="fa-solid fa-stop" aria-hidden="true"></span> Stabilize
-    </button>
+<!--    <mat-form-field id="cypher">-->
+<!--      <mat-label>Cypher Query</mat-label>-->
+<!--      <input matInput [(ngModel)]="cypherQuery" required [disabled]="isLoading">-->
+<!--    </mat-form-field>-->
+<!--    <button mat-raised-button color="accent" type="button" (click)="reload()">-->
+<!--      <span class="fa-solid fa-play" aria-hidden="true"></span> Submit-->
+<!--    </button>-->
+<!--    <button mat-raised-button color="primary" type="button" (click)="reset()">-->
+<!--      <span class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></span> Reset-->
+<!--    </button>-->
+<!--    <button mat-raised-button color="primary" type="button" (click)="stabilize()">-->
+<!--      <span class="fa-solid fa-stop" aria-hidden="true"></span> Stabilize-->
+<!--    </button>-->
   </span>
 
-<!--  <span id="cypher-wrapper">-->
-<!--    -->
+  <span id="cypher-wrapper">
+
 <!--    <input matInput placeholder="Cypher query" #cypher>-->
 <!--    Cypher query: <input type="text" #cypher>-->
 <!--    <input type="submit" value="Submit" (click)="reload()">-->
 <!--    <input type="submit" value="Stabilize" (click)="stabilize()">-->
-<!--  </span>-->
+  </span>
 </div>

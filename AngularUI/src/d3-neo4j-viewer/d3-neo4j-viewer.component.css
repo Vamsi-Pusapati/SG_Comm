@@ -1,0 +1,200 @@
+:host {
+  --viz-width: 900px;
+  --viz-height: 600px;
+  --viz-border-width: 3px;
+  --viz-border-radius: 2rem;
+  --viz-blur-radius: 2rem;
+  --viz-blur-opacity: 60%;
+
+  font-size: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.auth {
+  margin-bottom: 1rem;
+}
+
+.cypher {
+  margin-top: 1rem;
+}
+
+.form {
+  max-width: 100%;
+  padding: 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#cypher-button {
+  width: 50rem;
+}
+
+
+.form-field {
+  text-align: left;
+  margin-bottom: 1em;
+
+  label {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.25em;
+  }
+  input {
+    display: block;
+    width: 100%;
+    height: 2.5em;
+    border-radius: 0.25em;
+    border: none;
+    font-size: 1em;
+    padding: 0.5em;
+    font-weight: normal;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    outline: none;
+    &::placeholder {
+      color: white;
+    }
+    &[type="file"] {
+      display: none;
+    }
+  }
+  textarea {
+    display: block;
+    width: 100%;
+    height: 5em;
+    border-radius: 0.25em;
+    border: none;
+    padding: 0.5em;
+    font-size: 1em;
+    font-weight: normal;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    outline: none;
+  //  Change the color of the placeholder text
+  &::placeholder {
+    color: white;
+  }
+  }
+  span {
+    display: block;
+    font-size: 0.8em;
+    font-weight: normal;
+    color: white;
+    margin-top: 0.25em;
+  }
+}
+
+
+/******************************************************
+ * Viz Styles
+ ******************************************************/
+
+/* https://css-tricks.com/gradient-borders-in-css/ */
+#viz {
+  width: var(--viz-width);
+  height: var(--viz-height);
+  background: var(--white);
+  border-radius: var(--viz-border-radius);
+  margin-bottom: 2rem;
+
+  position: relative;
+}
+
+#viz-wrapper {
+  width: calc(var(--viz-width) + 2 * var(--viz-border-width));
+  height: calc(var(--viz-height) + 2 * var(--viz-border-width));
+  position: relative;
+  background: linear-gradient(to top left, var(--purple), var(--blue));
+  padding: var(--viz-border-width);
+  border-radius: calc(var(--viz-border-radius) + var(--viz-border-width));
+}
+
+#viz-wrapper * {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+#viz::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--viz-border-width));
+  left: calc(-1 * var(--viz-border-width));
+  width: calc(100% + 2 * var(--viz-border-width));
+  height: calc(100% + 2 * var(--viz-border-width));
+  background: linear-gradient(to top left, var(--purple), var(--blue));
+  border-radius: calc(var(--viz-border-radius) + var(--viz-border-width));
+  z-index: -1;
+  filter: blur(var(--viz-blur-radius));
+  opacity: var(--viz-blur-opacity);
+}
+/******************************************************/
+
+
+/******************************************************
+ * SVG Styles
+ ******************************************************/
+svg {
+  width: 100%;
+  height: 100%;
+}
+/******************************************************/
+
+
+/******************************************************
+ * SVG Zoom
+ ******************************************************/
+svg {
+  cursor: grab;
+}
+
+circle.node:active { /* When the node is being dragged */
+  cursor: grabbing;
+}
+
+circle.node:hover {
+  cursor: pointer !important;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+/******************************************************/
+
+
+/******************************************************
+ * Cypher form
+ ******************************************************/
+.cypher-form {
+  width: var(--viz-width);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.cypher-form > button {
+  height: 3.5rem;
+}
+
+#cypher {
+  flex-grow: 1;
+}
+/*****************************************************/

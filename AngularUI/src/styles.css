@@ -37,10 +37,26 @@ h3 {
 
 html,
 body {
-  height: 100%;
-  min-height: 100dvh;
+  scroll-behavior: smooth;
+  max-width: 100dvw;
   overflow-x: hidden;
-  overflow-y: hidden;
+  min-height: 100dvh;
+  height: fit-content;
+}
+
+
+#blur,
+#blob-container {
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+#blob-container {
+  z-index: -2;
 }
 
 #blob {
@@ -53,7 +69,6 @@ body {
   border-radius: 50%;
   background: linear-gradient(to left top, var(--purple), var(--blue));
   opacity: 0;
-  z-index: -2;
   transition: opacity 0.5s ease-in-out;
   transform-origin: center;
   animation:  rotate 20s linear infinite,
@@ -61,9 +76,6 @@ body {
 }
 
 #blur {
-  height: 100%;
-  width: 100%;
-  position: absolute;
   z-index: -1;
   backdrop-filter: blur(8rem);
 }

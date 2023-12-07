@@ -21,6 +21,7 @@ document.onpointerenter = () => {
 document.onpointermove = (event) => {
   blob.style.opacity = max_opacity;
   const {clientX, clientY} = event;
+
   blob.animate({
     left: `${clientX}px`,
     top: `${clientY}px`,

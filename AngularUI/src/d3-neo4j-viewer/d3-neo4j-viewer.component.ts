@@ -125,57 +125,85 @@ export class D3Neo4jViewerComponent {
       const result = await session.run(this.cypherQuery);
       const records = result.records;
 
-      records.forEach((record: { get: (arg0: string) => any; }) => {
-        const sourceNode = record.get('n');
-        const targetNode = record.get('m');
-        const relationship = record.get('r');
+      records.forEach((record: { get: (arg0: string) => any; keys: string[]}) => {
 
-        const sourceResourceClassIndex = sourceNode.labels.indexOf('Resource');
-        const targetResourceClassIndex = targetNode.labels.indexOf('Resource');
-
-        if (sourceResourceClassIndex > -1) {
-          sourceNode.labels.splice(sourceResourceClassIndex, 1);
+        if(record.keys.indexOf('n') !== -1) {
+          const sourceNode = record.get('n');
+          // const sourceResourceClassIndex = sourceNode.labels.indexOf('Resource');
+          // if (sourceResourceClassIndex > -1) {
+          //   sourceNode.labels.splice(sourceResourceClassIndex, 1);
+          // }
+          const sourceNodeData = {
+            id: sourceNode.identity.toString(),
+            name: sourceNode.properties['n4sch__name'],
+            comment: sourceNode.properties['n4sch__comment'],
+            classes: sourceNode.labels,
+            uri: sourceNode.properties['uri'],
+          };
+          // Add source node if not already added
+          if (!nodeIds.has(sourceNode.identity.toString())) {
+            this.nodes.push(sourceNodeData);
+            nodeIds.add(sourceNode.identity.toString());
+          }
         }
 
-        if (targetResourceClassIndex > -1) {
-          targetNode.labels.splice(targetResourceClassIndex, 1);
+        if(record.keys.indexOf('m') !== -1) {
+          const targetNode = record.get('m');
+
+          // const targetResourceClassIndex = targetNode.labels.indexOf('Resource');
+          // if (targetResourceClassIndex > -1) {
+          //   targetNode.labels.splice(targetResourceClassIndex, 1);
+          // }
+          const targetNodeData = {
+            id: targetNode.identity.toString(),
+            name: targetNode.properties['n4sch__name'],
+            comment: targetNode.properties['n4sch__comment'],
+            classes: targetNode.labels,
+            uri: targetNode.properties['uri'],
+          };
+          // Add target node if not already added
+          if (!nodeIds.has(targetNode.identity.toString())) {
+            this.nodes.push(targetNodeData);
+            nodeIds.add(targetNode.identity.toString());
+          }
+
         }
 
-        const sourceNodeData = {
-          id: sourceNode.identity.toString(),
-          name: sourceNode.properties['n4sch__name'],
-          comment: sourceNode.properties['n4sch__comment'],
-          classes: sourceNode.labels,
-          uri: sourceNode.properties['uri'],
-        };
+        if(record.keys.indexOf('r') !== -1 && record.keys.indexOf('n') !== -1 && record.keys.indexOf('m') !== -1) {
+          const relationship = record.get('r');
+          const targetNode = record.get('m');
+          const sourceNode = record.get('n');
 
-        const targetNodeData = {
-          id: targetNode.identity.toString(),
-          name: targetNode.properties['n4sch__name'],
-          comment: targetNode.properties['n4sch__comment'],
-          classes: targetNode.labels,
-          uri: targetNode.properties['uri'],
-        };
-
-        // Add source node if not already added
-        if (!nodeIds.has(sourceNode.identity.toString())) {
-          this.nodes.push(sourceNodeData);
-          nodeIds.add(sourceNode.identity.toString());
+          // const sourceResourceClassIndex = sourceNode.labels.indexOf('Resource');
+          // if (sourceResourceClassIndex > -1) {
+          //   sourceNode.labels.splice(sourceResourceClassIndex, 1);
+          // }
+          const sourceNodeData = {
+            id: sourceNode.identity.toString(),
+            name: sourceNode.properties['n4sch__name'],
+            comment: sourceNode.properties['n4sch__comment'],
+            classes: sourceNode.labels,
+            uri: sourceNode.properties['uri'],
+          };
+          // const targetResourceClassIndex = targetNode.labels.indexOf('Resource');
+          // if (targetResourceClassIndex > -1) {
+          //   targetNode.labels.splice(targetResourceClassIndex, 1);
+          // }
+          const targetNodeData = {
+            id: targetNode.identity.toString(),
+            name: targetNode.properties['n4sch__name'],
+            comment: targetNode.properties['n4sch__comment'],
+            classes: targetNode.labels,
+            uri: targetNode.properties['uri'],
+          };
+          // Add the relationship
+          this.links.push({
+            id: relationship.identity.toString(),
+            source: sourceNodeData.id,
+            target: targetNodeData.id,
+            type: relationship.type,
+          });
         }
-
-        // Add target node if not already added
-        if (!nodeIds.has(targetNode.identity.toString())) {
-          this.nodes.push(targetNodeData);
-          nodeIds.add(targetNode.identity.toString());
-        }
-
-        // Add the relationship
-        this.links.push({
-          id: relationship.identity.toString(),
-          source: sourceNodeData.id,
-          target: targetNodeData.id,
-          type: relationship.type,
-        });
       });
     } finally {
       await session.close();
@@ -190,7 +218,7 @@ export class D3Neo4jViewerComponent {
     const g = svg.append('g');
 
     const zoom = d3.zoom()
-      .scaleExtent([0.25, 5])  // This sets the limits for zooming (min, max)
+      .scaleExtent([0.25, 8])  // This sets the limits for zooming (min, max)
       .on('zoom', (event) => {
         g.attr('transform', event.transform);
       });

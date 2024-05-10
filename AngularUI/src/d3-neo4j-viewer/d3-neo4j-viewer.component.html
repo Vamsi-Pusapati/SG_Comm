@@ -1,0 +1,62 @@
+<div class="container">
+  <form class="auth form">
+    <mat-form-field>
+      <mat-label>Server URL</mat-label>
+      <input matInput name="serverUrl" placeholder="E.g. bolt://3.235.153.181:7687" [(ngModel)]="serverUrl" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput name="username" placeholder="E.g. neo4j" [(ngModel)]="user" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput name="password" type="password" [(ngModel)]="password" required>
+    </mat-form-field>
+<!--    <div class="form-field">-->
+<!--      <label>Server URL</label>-->
+<!--      <input name="serverUrl" placeholder="E.g. bolt://localhost:7687" [(ngModel)]="serverUrl" required>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--      <label>Username</label>-->
+<!--      <input name="username" placeholder="E.g. neo4j" [(ngModel)]="user" required>-->
+<!--    </div>-->
+<!--    <div class="form-field">-->
+<!--      <label>Password</label>-->
+<!--      <input name="password" type="password" [(ngModel)]="password" required>-->
+<!--    </div>-->
+    <button mat-raised-button color="primary" type="button" (click)="useCredentials()" [disabled]="isConnected">
+      <span class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></span> Connect
+    </button>
+  </form>
+  <div id="viz-wrapper">
+    <div id="viz">
+      <svg #graphContainer></svg>
+      <div id="loading" *ngIf="isLoading">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+    </div>
+  </div>
+  <span class="cypher form">
+    <mat-form-field id="cypher-button">
+      <mat-label>Cypher Query</mat-label>
+      <input matInput type="text" placeholder="E.g. MATCH (n) RETURN n LIMIT 25" [(ngModel)]="cypherQuery" required [disabled]="!isConnected || isLoading">
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="button" (click)="submitQuery()" [disabled]="!isConnected || isLoading">
+      <span class="fa-solid fa-play" aria-hidden="true"></span> Submit
+    </button>
+    <button mat-raised-button color="primary" type="button" (click)="reset()" [disabled]="!isConnected || isLoading">
+      <span class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></span> Reset
+    </button>
+    <button mat-raised-button color="primary" type="button" (click)="stabilize()" [disabled]="!isConnected || isLoading">
+      <span class="fa-solid fa-stop" aria-hidden="true"></span> Stabilize
+    </button>
+  </span>
+
+  <span id="cypher-wrapper">
+
+<!--    <input matInput placeholder="Cypher query" #cypher>-->
+    <!--    Cypher query: <input type="text" #cypher>-->
+    <!--    <input type="submit" value="Submit" (click)="reload()">-->
+    <!--    <input type="submit" value="Stabilize" (click)="stabilize()">-->
+  </span>
+</div>

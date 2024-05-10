@@ -47,9 +47,9 @@ export class D3Neo4jViewerComponent {
   private nodes: Node[] = [];
   private links: Link[] = [];
 
-  public serverUrl = 'bolt://localhost:7687';
+  public serverUrl = 'bolt://3.235.153.181:7687';
   public user = 'neo4j';
-  public password = 'password';
+  public password = 'somepass';
 
   private simulation: any;
 

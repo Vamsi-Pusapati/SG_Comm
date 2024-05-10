@@ -46,9 +46,9 @@ export class Neo4jComponent implements AfterViewInit {
   // cypherQuery: string = this.defaultCypher;
 
   // TODO: Don't leave these past the demo :)
-  private serverUrl: string = 'bolt://localhost:7687';
+  private serverUrl: string = 'bolt://3.235.153.181:7687';
   private user: string = 'neo4j';
-  private password: string = 'password';
+  private password: string = 'somepass';
 
   private driver = neo4j.driver(
     this.serverUrl,

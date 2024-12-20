@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Node Information</h1>
+<div mat-dialog-content>
+  <p><strong>ID:</strong> {{data.id}}</p>
+  <p><strong>Name:</strong> {{data.name}}</p>
+  <p *ngIf="data.comment"><strong>Details:</strong> {{data.comment}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
